@@ -1,0 +1,34 @@
+name: Post-Race Analytics
+
+on:
+  schedule:
+    # Runs every Sunday at 20:00 UTC — adjust to a few hours after your target race finishes.
+    - cron: "0 20 * * 0"
+  workflow_dispatch:   # lets you trigger it manually from the GitHub Actions tab, for testing
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+  permissions:
+    contents:write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python -m f1bot.post_race_analytics
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+- name: Commit season archive
+        run: |
+          git config user.name "f1-telemetry-bot"
+          git config user.email "actions@github.com"
+          git add state/season_archive.csv
+          git diff --staged --quiet || git commit -m "Update season archive [skip ci]"
+          git push
+- name: Upload pit stop chart
+        uses: actions/upload-artifact@v4
+        with:
+          name: pit-chart
+          path: state/pit_chart.png
