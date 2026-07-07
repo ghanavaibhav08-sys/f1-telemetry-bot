@@ -38,7 +38,7 @@ def build_report(session_key, circuit_name):
         f"Total Pit Stops: {len(pits)}\n"
         f"Tyre Usage: {tyre_usage}\n"
         f"Avg Track Temp: {avg_track_temp:.1f}°C" if avg_track_temp else ""
-    
+    )
 
 def append_to_archive(circuit, fastest_driver, fastest_time, avg_pit, total_pits):
     path = "state/season_archive.csv"
