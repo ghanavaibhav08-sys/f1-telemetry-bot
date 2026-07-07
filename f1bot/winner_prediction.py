@@ -42,7 +42,7 @@ def best_laps_by_driver(laps):
             continue
         if num not in best or dur < best[num]:
             best[num] = dur
-return best
+     return best
 
 def normalize_inverse(scores: dict):
     values = [v for v in scores.values() if v]
