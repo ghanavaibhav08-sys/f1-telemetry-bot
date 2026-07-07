@@ -9,8 +9,8 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-  permissions:
-    contents:write
+    permissions:
+      contents:write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -20,14 +20,14 @@ jobs:
       - run: python -m f1bot.post_race_analytics
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-- name: Commit season archive
+      - name: Commit season archive
         run: |
           git config user.name "f1-telemetry-bot"
           git config user.email "actions@github.com"
           git add state/season_archive.csv
           git diff --staged --quiet || git commit -m "Update season archive [skip ci]"
           git push
-- name: Upload pit stop chart
+      - name: Upload pit stop chart
         uses: actions/upload-artifact@v4
         with:
           name: pit-chart
