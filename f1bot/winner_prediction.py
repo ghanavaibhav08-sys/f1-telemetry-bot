@@ -100,7 +100,7 @@ def predict(country_name, year=2026, practice_weight=0.4, quali_weight=0.6):
 
         predicted_position = model.predict([[practice_score, quali_score]])
 
-      """  score = practice_weight * practice_score.get(d, 0) + quali_weight * quali_score.get(d, 0)"""
+     
         meta = drivers_meta.get(d, {})
         name = meta.get("full_name", f"#{d}")
         team = meta.get("team_name", "")
