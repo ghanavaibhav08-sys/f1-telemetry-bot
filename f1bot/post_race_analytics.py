@@ -2,7 +2,8 @@ import datetime as dt
 import os
 import pandas as pd
 import csv
-import dateutil import parser
+import dateutil
+import parser
 
 from f1bot import openf1_client as f1
 from f1bot.notify import send_discord
