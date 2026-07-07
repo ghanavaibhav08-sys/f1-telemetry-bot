@@ -1,6 +1,7 @@
 import datetime as dt
 import os
 import pandas as pd
+import csv
 
 from f1bot import openf1_client as f1
 from f1bot.notify import send_discord
@@ -37,7 +38,7 @@ def build_report(session_key, circuit_name):
         f"Total Pit Stops: {len(pits)}\n"
         f"Tyre Usage: {tyre_usage}\n"
         f"Avg Track Temp: {avg_track_temp:.1f}°C" if avg_track_temp else ""
-    import csv
+    
 
 def append_to_archive(circuit, fastest_driver, fastest_time, avg_pit, total_pits):
     path = "state/season_archive.csv"
