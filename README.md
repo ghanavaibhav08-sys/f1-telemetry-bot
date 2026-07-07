@@ -1,11 +1,11 @@
 
 Automatically tracks Formula 1 race weekends and sends updates straight to Discord and Gmail:
 
-- 📊 **Post-race analytics** — fastest lap, pit stop stats, tyre strategy — emailed/posted right after each race ends
-- 🚨 **Instant alerts** — flags, safety cars, and incidents during a live session
-- 🏆 **Winner prediction** — a predicted top 5 sent right after Qualifying ends, based on practice + qualifying pace
+- Post-race analytics — fastest lap, pit stop stats, tyre strategy — emailed/posted right after each race ends
+- Instant alerts— flags, safety cars, and incidents during a live session
+- Winner prediction — a predicted top 5 sent right after Qualifying ends, based on practice + qualifying pace
 
-Built entirely on free tools: [OpenF1 API](https://openf1.org) for data, GitHub Actions for scheduling, Discord webhooks and Gmail for notifications. No server, no paid plan, no n8n.
+ [OpenF1 API](https://openf1.org) for data, GitHub Actions for scheduling, Discord webhooks and Gmail for notifications
 
 ## How it works
 `f1bot/session_watcher.py` checks every 15 minutes whether Qualifying or the Race has just ended, and automatically triggers the right report. `f1bot/instant_alerts.py` checks every 5 minutes for new race control messages during a live session.
@@ -27,4 +27,4 @@ Built entirely on free tools: [OpenF1 API](https://openf1.org) for data, GitHub 
 - `f1bot/instant_alerts.py` — live session alerts
 - `f1bot/winner_prediction.py` — practice + qualifying based prediction
 - `f1bot/session_watcher.py` — decides *when* the above should run, based on real session end times
-- `.github/workflows/` — GitHub Actions schedules for each script                                                                                                                                                                     EOF 
+- `.github/workflows/` — GitHub Actions schedules for each script                                                                                                                                                                    
