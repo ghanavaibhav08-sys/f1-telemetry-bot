@@ -12,8 +12,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
       - run: pip install -r requirements.txt
@@ -28,7 +28,7 @@ jobs:
           git diff --staged --quiet || git commit -m "Update season archive [skip ci]"
           git push
       - name: Upload pit stop chart
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pit-chart
           path: state/pit_chart.png
