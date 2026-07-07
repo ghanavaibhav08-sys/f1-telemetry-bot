@@ -52,6 +52,8 @@ def build_report(session_key, circuit_name):
         f"Tyre Usage: {tyre_usage}\n"
         f"Avg Track Temp: {avg_track_temp:.1f}°C" if avg_track_temp else ""
     )
+    append_to_archive(circuit_name, fastest_driver,fastest['lap_duration'], avg_pit, len(pits))
+    return report
 
 def append_to_archive(circuit, fastest_driver, fastest_time, avg_pit, total_pits):
     path = "state/season_archive.csv"
@@ -61,8 +63,8 @@ def append_to_archive(circuit, fastest_driver, fastest_time, avg_pit, total_pits
         if not file_exists:
             writer.writerow(["circuit", "fastest_driver", "fastest_lap_time", "avg_pit_seconds", "total_pit_stops"])
         writer.writerow([circuit, fastest_driver, fastest_time, avg_pit, total_pits])
-    )
-    return report
+    
+    
 
 def main():
     race = get_latest_finished_race()
@@ -70,9 +72,8 @@ def main():
         print("No completed race found yet.")
         return
     report = build_report(race["session_key"], race["circuit_short_name"])
-    append_to_archive(circuit,fastest_driver,fastes_time,avg_pit,total_pits):
-    print(report)
-    send_discord(report)
+    send-discord(report)
+    
 
 if __name__ == "__main__":
     main()
