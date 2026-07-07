@@ -6,16 +6,29 @@ import csv
 from f1bot import openf1_client as f1
 from f1bot.notify import send_discord
 
-def get_latest_finished_race(year=2026):
-    sessions = f1.get_sessions(year=year, session_type="Race")
-    now = dt.datetime.now(dt.timezone.utc)
-    past_races = [
-        s for s in sessions
-        if dt.datetime.fromisoformat(s["date_end"].replace("Z", "+00:00")) < now
-    ]
-    past_races.sort(key=lambda s: s["date_end"], reverse=True)
-    return past_races[0] if past_races else None
+def get_latest_finished_race(year=None):
+    if year is None: 
+        year = dt.datetime.now().year
+    try:
+        sessions = f1.get_sessions(year=year, session_type="Race")
+    except Exception:
+        return None
 
+    if not sessions:
+        return None
+    now = dt.datetime.now(dt.timezone.utc)
+    past_races = []
+    for s in sessions:
+        date_end_str = s["date_end"].replace("Z", "+00:00")
+        if dt.datetime.fromisofformat(date_end_str) < dt.datetime.now(dt.timezone.utc):
+            past_races.append(s)
+
+    if not past_races: 
+        return None
+
+    past_races.sort(key=lambda s: s["data_end"], reverse=True)
+    return past_races[0]
+   
 def build_report(session_key, circuit_name):
     laps = pd.DataFrame(f1.get_laps(session_key))
     stints = pd.DataFrame(f1.get_stints(session_key))
