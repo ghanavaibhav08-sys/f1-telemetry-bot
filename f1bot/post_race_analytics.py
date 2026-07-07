@@ -2,6 +2,7 @@ import datetime as dt
 import os
 import pandas as pd
 import csv
+import dateutil import parser
 
 from f1bot import openf1_client as f1
 from f1bot.notify import send_discord
@@ -20,7 +21,7 @@ def get_latest_finished_race(year=None):
     past_races = []
     for s in sessions:
         date_end_str = s["date_end"].replace("Z", "+00:00")
-        if dt.datetime.fromisofformat(date_end_str) < dt.datetime.now(dt.timezone.utc):
+        if parser.parse(date_end_str) < now:
             past_races.append(s)
 
     if not past_races: 
