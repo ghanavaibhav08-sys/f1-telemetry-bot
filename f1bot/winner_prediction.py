@@ -13,7 +13,7 @@ def get_current_weekend_country(year=2026):
     def parse(d):
          return dt.datetime.fromisofformat(d.replace("Z","+00:00"))
         
-    for m in meetings:
+    for m in meeting:
         start = parse(m["date_start"]) - dt.timedelta(days=1)
         end = parse(m["date_end"]) + dt.timedelta(days=1)
         if start <= now <= end:
@@ -42,7 +42,7 @@ def best_laps_by_driver(laps):
             continue
         if num not in best or dur < best[num]:
             best[num] = dur
-    return best
+return best
 
 def normalize_inverse(scores: dict):
     values = [v for v in scores.values() if v]
