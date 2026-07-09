@@ -8,7 +8,7 @@ def get_current_weekend_country(year=2026):
     currently in (or, if between weekends, the next upcoming one) —
     no manual editing needed race to race."""
 
-    meeting = f1.get_current_weekend_meeting()
+    meeting = f1.get_current_weekend_meeting().json()
     country = meeting["country_name"] if meeting else None
     def parse(d):
          return dt.datetime.fromisofformat(d.replace("Z","+00:00"))
